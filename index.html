@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ml" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ടൊയോട്ട റാഫോർ vs മസ്ദ സിഎക്സ്-5: ജിദ്ദ കാർ കമ്പാരിസൺ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans Malayalam"', 'sans-serif'],
+                    },
+                    colors: {
+                        toyota: '#b91c1c', // Deep red
+                        mazda: '#0369a1', // Deep blue
+                        stone: {
+                            50: '#fafaf9',
+                            100: '#f5f5f4',
+                            800: '#292524',
+                            900: '#1c1917',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* * Chart Container Styling as per Technical Requirements
+         * Ensures charts are responsive, constrained, and do not cause overflow.
+         */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Prevents stretching on large screens */
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* Base height for mobile */
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px; /* Taller on larger screens */
+            }
+        }
+        
+        /* Custom scrollbar for tab content if needed */
+        .tab-content-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .tab-content-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        .tab-content-scroll::-webkit-scrollbar-thumb {
+            background: #d4d4d8; 
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased leading-relaxed">
+
+    <!-- Chosen Palette: Warm Neutrals with Brand Accents (Toyota Red, Mazda Blue) -->
+    <!-- Application Structure Plan: 
+         1. Header & Context: Sets the scene for the Jeddah market.
+         2. Price Summary Cards: Immediate answer to the user's request for a quick price overview.
+         3. Interactive Trim Explorer: A tabbed interface allowing deep dives into Base, Mid, and Top trims without overwhelming the user with long scrolling tables.
+         4. Ownership Analytics: Interactive charts (Chart.js) showing depreciation and maintenance costs over 5 years.
+         5. Dealership & Final Verdict: Textual summary categorized by buyer persona.
+         This structure moves from broad overview to specific details to long-term impact. -->
+    <!-- Visualization & Content Choices: 
+         - Price Summary: HTML Cards -> Quick scanning.
+         - Trim Specs: HTML Grids in Tabs -> Easy side-by-side comparison without massive tables.
+         - Depreciation: Line Chart (Chart.js) -> Best for showing trends over time (value retention).
+         - Maintenance: Bar Chart (Chart.js) -> Best for comparing total amounts.
+         - NO SVG used. Layouts rely on Tailwind CSS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <div class="max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+        
+        <!-- Header Section -->
+        <header class="mb-10 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-stone-900 mb-4">ടൊയോട്ട റാഫോർ vs മസ്ദ സിഎക്സ്-5</h1>
+            <p class="text-lg text-stone-600 max-w-3xl mx-auto">
+                സൗദി അറേബ്യയിലെ (ജിദ്ദ) കോംപാക്റ്റ് എസ്‌യുവി വിപണിയിലെ സമഗ്ര താരതമ്യ പഠനം. സി-സെഗ്മെന്റിലെ പ്രമുഖരായ രണ്ട് ജാപ്പനീസ് മോഡലുകൾ തമ്മിലുള്ള വ്യത്യാസങ്ങൾ കണ്ടെത്തുക.
+            </p>
+        </header>
+
+        <!-- Price Summary Section -->
+        <section class="mb-12">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-stone-800 border-b-2 border-stone-200 pb-2 inline-block">വില വിവരപ്പട്ടിക (Price Summary)</h2>
+                <p class="text-sm text-stone-500 mt-2">മൂന്ന് പ്രധാന വകഭേദങ്ങളുടെ അടിസ്ഥാനത്തിലുള്ള ഏകദേശ വില വിവരങ്ങൾ (SAR). ഡീലർഷിപ്പ് പ്രമോഷനുകൾക്കനുസരിച്ച് മാറ്റങ്ങൾ ഉണ്ടാകാം.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Base Trim Prices -->
+                <div class="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+                    <div class="bg-stone-100 py-3 px-4 border-b border-stone-200">
+                        <h3 class="text-lg font-semibold text-center">അടിസ്ഥാന മോഡൽ (Base)</h3>
+                    </div>
+                    <div class="p-4 space-y-4">
+                        <div class="flex justify-between items-center pb-2 border-b border-stone-100">
+                            <span class="font-medium text-toyota">Toyota RAV4 (LE)</span>
+                            <span class="font-bold">~ 99,935 - 106,375</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-mazda">Mazda CX-5 (GS/S)</span>
+                            <span class="font-bold">~ 96,000 - 97,750</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Middle Trim Prices -->
+                <div class="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden transform md:-translate-y-2 transition-transform">
+                    <div class="bg-stone-800 text-white py-3 px-4 border-b border-stone-800">
+                        <h3 class="text-lg font-semibold text-center">മിഡിൽ മോഡൽ (Middle)</h3>
+                    </div>
+                    <div class="p-4 space-y-4">
+                        <div class="flex justify-between items-center pb-2 border-b border-stone-100">
+                            <span class="font-medium text-toyota">Toyota RAV4 (XLE)</span>
+                            <span class="font-bold">~ 121,670 - 133,400</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-mazda">Mazda CX-5 (Ignite)</span>
+                            <span class="font-bold">~ 126,500 - 131,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Trim Prices -->
+                <div class="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+                    <div class="bg-stone-100 py-3 px-4 border-b border-stone-200">
+                        <h3 class="text-lg font-semibold text-center">ഉയർന്ന മോഡൽ (Top)</h3>
+                    </div>
+                    <div class="p-4 space-y-4">
+                        <div class="flex justify-between items-center pb-2 border-b border-stone-100">
+                            <span class="font-medium text-toyota">Toyota RAV4 (LTD)</span>
+                            <span class="font-bold">~ 151,800</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium text-mazda">Mazda CX-5 (High+)</span>
+                            <span class="font-bold">~ 135,000 - 140,875+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Trim Comparison Section -->
+        <section class="mb-12">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-stone-800 border-b-2 border-stone-200 pb-2 inline-block">വിശദമായ താരതമ്യം (Detailed Specs)</h2>
+                <p class="text-sm text-stone-500 mt-2">ഓരോ ട്രിം ലെവലിലുമുള്ള വാഹനങ്ങളുടെ എഞ്ചിൻ, ബോഡി, ഇന്റീരിയർ സവിശേഷതകൾ താഴെയുള്ള ടാബുകൾ വഴി തിരഞ്ഞെടുത്ത് വായിക്കാം.</p>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <div class="flex flex-wrap border-b border-stone-300">
+                <button onclick="openTab(event, 'tab-base')" class="tab-btn active-tab bg-white inline-block py-3 px-6 text-stone-800 font-semibold border-t-2 border-l-2 border-r-2 border-stone-300 rounded-t-lg focus:outline-none -mb-[1px]">
+                    ബേസ് വേർഷൻ (Base)
+                </button>
+                <button onclick="openTab(event, 'tab-mid')" class="tab-btn inline-block py-3 px-6 text-stone-500 font-semibold hover:text-stone-800 focus:outline-none">
+                    മിഡിൽ ട്രിം (Middle)
+                </button>
+                <button onclick="openTab(event, 'tab-top')" class="tab-btn inline-block py-3 px-6 text-stone-500 font-semibold hover:text-stone-800 focus:outline-none">
+                    ഹൈ-എൻഡ് (Top)
+                </button>
+            </div>
+
+            <!-- Tab Content Area -->
+            <div class="bg-white p-6 border border-stone-300 border-t-0 rounded-b-lg shadow-sm">
+                
+                <!-- Base Tab -->
+                <div id="tab-base" class="tab-content block">
+                    <p class="mb-6 text-stone-600">ഏറ്റവും കുറഞ്ഞ ബഡ്ജറ്റിൽ അടിസ്ഥാന സൗകര്യങ്ങളും സുരക്ഷയും ആഗ്രഹിക്കുന്ന ഉപഭോക്താക്കൾക്കായി. റാഫോർ 2.0L എഞ്ചിനും CVT ഗിയർബോക്സും നൽകുമ്പോൾ, മസ്ദ 2.5L എഞ്ചിനും 6-സ്പീഡ് ഓട്ടോമാറ്റിക്കും നൽകുന്നു.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- RAV4 Base -->
+                        <div class="border border-stone-100 p-4 rounded-lg bg-stone-50">
+                            <h4 class="text-xl font-bold text-toyota mb-4">Toyota RAV4 LE (4x2 / 4x4)</h4>
+                            <ul class="space-y-3 text-sm">
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">എഞ്ചിൻ</span> <span>2.0 ലിറ്റർ നാച്ചുറലി ആസ്പിറേറ്റഡ് (170 hp, 203 Nm)</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">ട്രാൻസ്മിഷൻ</span> <span>CVT (മികച്ച ഇന്ധനക്ഷമത, യാത്രാസുഖം)</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">മൈലേജ്</span> <span>16.3 - 16.8 Km/L</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">കാർഗോ സ്പേസ്</span> <span>1085 ലിറ്റർ (ലഗേജ് കൊണ്ടുപോകാൻ മികച്ചത്)</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">ഇന്റീരിയർ</span> <span>8 ഇഞ്ച് ഡിസ്പ്ലേ, ഫാബ്രിക് സീറ്റുകൾ, മാന്വൽ എസി</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">സസ്പെൻഷൻ</span> <span>യാത്രക്കാരുടെ സൗകര്യത്തിന് മുൻഗണന (Soft tune)</span></li>
+                            </ul>
+                        </div>
+                        <!-- Mazda Base -->
+                        <div class="border border-stone-100 p-4 rounded-lg bg-stone-50">
+                            <h4 class="text-xl font-bold text-mazda mb-4">Mazda CX-5 2.5L GS / S</h4>
+                            <ul class="space-y-3 text-sm">
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">എഞ്ചിൻ</span> <span>2.5 ലിറ്റർ സ്കൈആക്റ്റീവ്-ജി (187-190 hp, 252 Nm)</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">ട്രാൻസ്മിഷൻ</span> <span>6-സ്പീഡ് ഓട്ടോമാറ്റിക് (മികച്ച ഡ്രൈവിംഗ് ആസ്വാദനം)</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">മൈലേജ്</span> <span>14.4 Km/L</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">കാർഗോ സ്പേസ്</span> <span>442 ലിറ്റർ (അടിസ്ഥാനം)</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">ഇന്റീരിയർ</span> <span>10.25 ഇഞ്ച് സ്ക്രീൻ, ഡാഷ്ബോർഡ് പ്രീമിയം പ്ലാസ്റ്റിക്, മികച്ച നോയ്‌സ് ഐസൊലേഷൻ</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">സസ്പെൻഷൻ</span> <span>ദൃഢമായ സസ്പെൻഷൻ, മികച്ച കോർണറിംഗ് (Stiff tune)</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mid Tab -->
+                <div id="tab-mid" class="tab-content hidden">
+                    <p class="mb-6 text-stone-600">'വാല്യൂ ഫോർ മണി' മോഡലുകൾ. ടൊയോട്ട ഇവിടെ മികച്ച മൈലേജുള്ള ഹൈബ്രിഡ് ഓപ്ഷൻ അവതരിപ്പിക്കുമ്പോൾ, മസ്ദ സ്പോർട്ടി ലുക്കിലും മികച്ച ഓഡിയോ സിസ്റ്റത്തിലും ശ്രദ്ധ കേന്ദ്രീകരിക്കുന്നു.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- RAV4 Mid -->
+                        <div class="border border-stone-100 p-4 rounded-lg bg-stone-50">
+                            <h4 class="text-xl font-bold text-toyota mb-4">Toyota RAV4 XLE (AWD/HEV)</h4>
+                            <ul class="space-y-3 text-sm">
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">പ്രധാന സവിശേഷത</span> <span class="text-green-700 font-medium">2.5L ഹൈബ്രിഡ് സിസ്റ്റം (219 hp) ലഭ്യമാണ്</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">മൈലേജ് (ഹൈബ്രിഡ്)</span> <span>22.2 Km/L (നഗരങ്ങളിലെ ട്രാഫിക്കിൽ ഇലക്ട്രിക് മോഡ് ഉപയോഗപ്രദം)</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">എക്സ്റ്റീരിയർ</span> <span>17 ഇഞ്ച് അലോയ് വീലുകൾ, എൽഇഡി പ്രൊജക്ടർ</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">ഇന്റീരിയർ</span> <span>ഡ്യുവൽ-സോൺ ഓട്ടോ എസി, സ്മാർട്ട് കീ, പുഷ്-ബട്ടൺ സ്റ്റാർട്ട്</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">സുരക്ഷ</span> <span>ബ്ലൈൻഡ് സ്പോട്ട് മോണിറ്റർ (BSM), റിയർ ക്രോസ്-ട്രാഫിക് അലേർട്ട്</span></li>
+                            </ul>
+                        </div>
+                        <!-- Mazda Mid -->
+                        <div class="border border-stone-100 p-4 rounded-lg bg-stone-50">
+                            <h4 class="text-xl font-bold text-mazda mb-4">Mazda CX-5 Ignite Edition</h4>
+                            <ul class="space-y-3 text-sm">
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">പ്രധാന സവിശേഷത</span> <span>i-Activ AWD സിസ്റ്റം, G-Vectoring Control Plus</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">എക്സ്റ്റീരിയർ</span> <span>19 ഇഞ്ച് ബ്ലാക്ക് അലോയ് വീലുകൾ, കറുത്ത റിയർ വ്യൂ മിററുകൾ</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">ഇന്റീരിയർ</span> <span class="text-amber-700 font-medium">ടെറാക്കോട്ട നാപ്പ ലെതർ സീറ്റുകൾ</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">സാങ്കേതികവിദ്യ</span> <span>10-സ്പീക്കർ ബോസ് (Bose) സറൗണ്ട് സൗണ്ട്, ഹെഡ്-അപ്പ് ഡിസ്പ്ലേ (HUD)</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">സുരക്ഷ</span> <span>360-ഡിഗ്രി ക്യാമറ, BSM, RCTA</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Tab -->
+                <div id="tab-top" class="tab-content hidden">
+                    <p class="mb-6 text-stone-600">പരമാവധി ആഡംബരവും സാങ്കേതിക തികവും. റാഫോർ സുരക്ഷയ്ക്കും ഹൈബ്രിഡ് ക്രൂയിസിംഗിനും പ്രാധാന്യം നൽകുമ്പോൾ, മസ്ദ ഒരു യൂറോപ്യൻ ആഡംബര കാറിന് സമാനമായ ഫിനിഷിംഗ് നൽകുന്നു.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- RAV4 Top -->
+                        <div class="border border-stone-100 p-4 rounded-lg bg-stone-50">
+                            <h4 class="text-xl font-bold text-toyota mb-4">Toyota RAV4 LTD 4x4 HEV</h4>
+                            <ul class="space-y-3 text-sm">
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">പവർട്രെയിൻ</span> <span>2.5L ഹൈബ്രിഡ് (219 hp), eCVT (ശബ്ദരഹിതമായ ഡ്രൈവിംഗ്)</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">ഡിസ്പ്ലേ</span> <span>12.3 ഇഞ്ച് ഫുൾ ഡിജിറ്റൽ ക്ലസ്റ്റർ, 10.5 ഇഞ്ച് മെയിൻ സ്ക്രീൻ</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">ആഡംബരം</span> <span>വെന്റിലേറ്റഡ് (തണുപ്പിക്കാവുന്ന) പ്രീമിയം ലെതർ സീറ്റുകൾ, 11-സ്പീക്കർ JBL ഓഡിയോ</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">അഡ്വാൻസ്ഡ് സുരക്ഷ</span> <span>Toyota Safety Sense 2.5 (ഓട്ടോ എമർജൻസി ബ്രേക്കിംഗ്, ലെയ്ൻ അസിസ്റ്റ്, റഡാർ ക്രൂയിസ്)</span></li>
+                            </ul>
+                        </div>
+                        <!-- Mazda Top -->
+                        <div class="border border-stone-100 p-4 rounded-lg bg-stone-50">
+                            <h4 class="text-xl font-bold text-mazda mb-4">Mazda CX-5 High Plus / Signature</h4>
+                            <ul class="space-y-3 text-sm">
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">പവർട്രെയിൻ</span> <span>2.5L (190 hp) അല്ലെങ്കിൽ ഓപ്ഷണൽ 2.5L ടർബോ (256 hp, 433 Nm)</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">ഡിസ്പ്ലേ</span> <span>7 ഇഞ്ച് ഡിജിറ്റൽ ക്ലസ്റ്റർ, HUD</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">ക്രാഫ്റ്റ്മാൻഷിപ്പ്</span> <span>കറ്റൂറ ബ്രൗൺ നാപ്പ ലെതർ, ലെയേർഡ് വുഡ് ട്രിം, അക്കൗസ്റ്റിക് ഗ്ലാസ് (മികച്ച NVH)</span></li>
+                                <li class="flex flex-col"><span class="font-semibold text-stone-500 text-xs uppercase">അഡ്വാൻസ്ഡ് സുരക്ഷ</span> <span>Mazda i-Activsense (ട്രാഫിക് ജാം അസിസ്റ്റ് ഉൾപ്പെടെ)</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ownership Analytics Section (Charts) -->
+        <section class="mb-12">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-stone-800 border-b-2 border-stone-200 pb-2 inline-block">ഉടമസ്ഥാവകാശവും വിപണി മൂല്യവും</h2>
+                <p class="text-sm text-stone-500 mt-2">മൂല്യശോഷണം (Depreciation), 5 വർഷത്തെ പരിപാലന ചെലവ് എന്നിവയിലെ വ്യത്യാസങ്ങൾ (ജിദ്ദ മാർക്കറ്റ് അസംഷൻ).</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Depreciation Chart -->
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-stone-200">
+                    <h3 class="text-lg font-semibold text-center mb-2">മൂല്യശോഷണ നിരക്ക് (Value Retention %)</h3>
+                    <p class="text-xs text-center text-stone-500 mb-4">ഒരു പുതിയ വാഹനം വാങ്ങി 5 വർഷം വരെയുള്ള കാലയളവിൽ നിലനിർത്തുന്ന മൂല്യം.</p>
+                    <div class="chart-container">
+                        <canvas id="depreciationChart"></canvas>
+                    </div>
+                    <p class="text-sm text-stone-600 mt-4 px-2">
+                        ടൊയോട്ട ബ്രാൻഡിനോടുള്ള വിശ്വാസ്യതയും ഹൈബ്രിഡ് ഓപ്ഷന്റെ ജനപ്രീതിയും കാരണം സെക്കൻഡ് ഹാൻഡ് വിപണിയിൽ റാഫോർ വളരെ ഉയർന്ന ഡിമാൻഡ് നിലനിർത്തുന്നു (ഉയർന്ന Liquidity).
+                    </p>
+                </div>
+
+                <!-- Maintenance Chart -->
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-stone-200">
+                    <h3 class="text-lg font-semibold text-center mb-2">5 വർഷത്തെ പരിപാലന ചെലവ് (Maintenance)</h3>
+                    <p class="text-xs text-center text-stone-500 mb-4">സർവീസ്, പാർട്സുകൾ എന്നിവ ഉൾപ്പെടുന്ന ഏകദേശ ചിലവ് (SAR).</p>
+                    <div class="chart-container">
+                        <canvas id="maintenanceChart"></canvas>
+                    </div>
+                    <div class="mt-4 px-2 text-sm text-stone-600 space-y-2">
+                        <p><strong>ടൊയോട്ട (ALJ):</strong> വിപുലമായ സർവീസ് ശൃംഖല, പാർട്സുകൾ എളുപ്പത്തിൽ ലഭ്യമാണ്. കുറഞ്ഞ ഇൻഷുറൻസ് നിരക്ക്.</p>
+                        <p><strong>മസ്ദ (HHA):</strong> പ്രീമിയം പാർട്സുകളും സങ്കീർണ്ണമായ സാങ്കേതികവിദ്യയും കാരണം പരിപാലന ചെലവ് അല്പം കൂടുതലാണ്. ഡീലർഷിപ്പ് ശൃംഖല താരതമ്യേന ചെറുതാണ്.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Verdict Section -->
+        <section class="bg-stone-800 text-stone-100 rounded-2xl p-6 md:p-8 shadow-md">
+            <h2 class="text-2xl font-bold mb-6 text-center text-white">ഏതാണ് നിങ്ങൾക്ക് അനുയോജ്യം? (Conclusion)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <div class="bg-stone-700/50 p-5 rounded-xl border border-stone-600">
+                    <h3 class="text-xl font-bold text-red-400 mb-3">Toyota RAV4 തിരഞ്ഞെടുക്കാം, എങ്കിൽ:</h3>
+                    <ul class="space-y-2 text-sm text-stone-300 list-disc list-inside">
+                        <li>നിങ്ങൾക്ക് മികച്ച ഇന്ധനക്ഷമത വേണം (പ്രത്യേകിച്ച് ഹൈബ്രിഡ് മോഡൽ).</li>
+                        <li>കുടുംബത്തോടൊപ്പമുള്ള യാത്രകൾക്ക് വലിയ ലഗേജ് സ്പേസ് ആവശ്യമാണ്.</li>
+                        <li>കുറഞ്ഞ പരിപാലന ചെലവും, അറ്റകുറ്റപ്പണികൾ എളുപ്പമാക്കുന്ന വലിയ ഡീലർ നെറ്റ്‌വർക്കും (ALJ) ആഗ്രഹിക്കുന്നു.</li>
+                        <li>ഭാവിയിൽ വാഹനം വിൽക്കുമ്പോൾ ഉയർന്ന തുക (Resale Value) തിരികെ ലഭിക്കണം.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-stone-700/50 p-5 rounded-xl border border-stone-600">
+                    <h3 class="text-xl font-bold text-blue-400 mb-3">Mazda CX-5 തിരഞ്ഞെടുക്കാം, എങ്കിൽ:</h3>
+                    <ul class="space-y-2 text-sm text-stone-300 list-disc list-inside">
+                        <li>ഡ്രൈവിംഗ് ഒരു വികാരമായി കാണുകയും മികച്ച ഹാൻഡ്‌ലിംഗ് ആഗ്രഹിക്കുകയും ചെയ്യുന്നു.</li>
+                        <li>യൂറോപ്യൻ കാറുകൾക്ക് സമാനമായ പ്രീമിയം ഇന്റീരിയർ (നാപ്പ ലെതർ, വുഡ് ട്രിം) ഇഷ്ടപ്പെടുന്നു.</li>
+                        <li>യാത്രകളിൽ പുറത്തുനിന്നുള്ള ശബ്ദം കുറഞ്ഞ, നിശബ്ദമായ ക്യാബിൻ (NVH) ആവശ്യമാണ്.</li>
+                        <li>സ്പോർട്ടി ഡിസൈനും പരമ്പരാഗത ഗിയർബോക്സിന്റെ അനുഭവവും (CVT-ക്ക് പകരം) ആസ്വദിക്കുന്നു.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JavaScript functionality -->
+    <script>
+        // Tab switching logic
+        function openTab(evt, tabId) {
+            // Hide all tab content
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("block");
+                tabContents[i].classList.add("hidden");
+            }
+
+            // Remove active classes from all buttons
+            const tabBtns = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < tabBtns.length; i++) {
+                tabBtns[i].classList.remove("bg-white", "text-stone-800", "border-t-2", "border-l-2", "border-r-2", "border-stone-300", "rounded-t-lg", "active-tab", "-mb-[1px]");
+                tabBtns[i].classList.add("text-stone-500", "border-transparent");
+            }
+
+            // Show current tab, add active classes
+            document.getElementById(tabId).classList.remove("hidden");
+            document.getElementById(tabId).classList.add("block");
+            evt.currentTarget.classList.remove("text-stone-500", "border-transparent");
+            evt.currentTarget.classList.add("bg-white", "text-stone-800", "border-t-2", "border-l-2", "border-r-2", "border-stone-300", "rounded-t-lg", "active-tab", "-mb-[1px]");
+        }
+
+        // Initialize Charts when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Common Chart.js font setup
+            Chart.defaults.font.family = '"Noto Sans Malayalam", sans-serif';
+            Chart.defaults.color = '#57534e'; // stone-600
+
+            // 1. Depreciation Line Chart
+            const ctxDep = document.getElementById('depreciationChart').getContext('2d');
+            new Chart(ctxDep, {
+                type: 'line',
+                data: {
+                    labels: ['Year 0', 'Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                    datasets: [
+                        {
+                            label: 'Toyota RAV4',
+                            data: [100, 90, 81, 73, 71, 69.7], // Calculated based on report (3yr: 73%, 5yr: 100-30.3)
+                            borderColor: '#b91c1c', // Toyota red
+                            backgroundColor: 'rgba(185, 28, 28, 0.1)',
+                            borderWidth: 3,
+                            pointBackgroundColor: '#b91c1c',
+                            tension: 0.3,
+                            fill: true
+                        },
+                        {
+                            label: 'Mazda CX-5',
+                            data: [100, 88, 77, 68, 62, 57.6], // Calculated based on report (3yr: 68%, 5yr: 100-42.4)
+                            borderColor: '#0369a1', // Mazda blue
+                            backgroundColor: 'rgba(3, 105, 161, 0.1)',
+                            borderWidth: 3,
+                            pointBackgroundColor: '#0369a1',
+                            tension: 0.3,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false, // Critical for custom container sizing
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y + '% Value';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            min: 40,
+                            max: 100,
+                            title: { display: true, text: 'Percentage (%)' }
+                        }
+                    }
+                }
+            });
+
+            // 2. Maintenance Costs Bar Chart
+            const ctxMaint = document.getElementById('maintenanceChart').getContext('2d');
+            new Chart(ctxMaint, {
+                type: 'bar',
+                data: {
+                    labels: ['Toyota RAV4', 'Mazda CX-5'],
+                    datasets: [{
+                        label: 'Total Cost (SAR)',
+                        data: [21800, 24500],
+                        backgroundColor: [
+                            'rgba(185, 28, 28, 0.8)', // Toyota red
+                            'rgba(3, 105, 161, 0.8)'  // Mazda blue
+                        ],
+                        borderRadius: 6,
+                        barPercentage: 0.6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false, // Critical for custom container sizing
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return 'SAR ' + context.parsed.y.toLocaleString();
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Estimated Cost (SAR)' }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
